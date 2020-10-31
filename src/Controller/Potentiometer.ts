@@ -106,10 +106,10 @@ class Potentiometer implements ControllerLed {
     toSysex(): Sysex {
         return new Sysex([
             this.cc,
-            this.midiChannel,
+            0,
             this.min,
             this.max,
-            0,
+            this.midiChannel,
             0
         ]);
     };
