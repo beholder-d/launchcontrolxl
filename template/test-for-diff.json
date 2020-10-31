@@ -52,13 +52,15 @@
   {"id": "B1:6", "messageType": "note", "note": 91, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
   {"id": "B1:7", "messageType": "note", "note": 92, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"}
 ],
-"controlButton": [
-  {"id": "CB0", "messageType": "note", "note": 105, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB1", "messageType": "note", "note": 106, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB2", "messageType": "note", "note": 107, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB3", "messageType": "note", "note": 108, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB4", "messageType": "note", "note": 127, "min": 87, "max": 88, "midiChannel": 12, "pressType": "toggle"},
-  {"id": "CB5", "messageType": "cc", "cc": 101, "min": 0, "max": 89, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB6", "messageType": "cc", "cc": 102, "min": 0, "max": 90, "midiChannel": 0, "pressType": "momentary"},
-  {"id": "CB7", "messageType": "cc", "cc": 103, "min": 0, "max": 91, "midiChannel": 0, "pressType": "momentary"}
+"upperButton": [
+  {"id": "UB0", "messageType": "note", "note": 127, "min": 87, "max": 88, "midiChannel": 12, "pressType": "toggle"},
+  {"id": "UB1", "messageType": "cc", "cc": 101, "min": 0, "max": 89, "midiChannel": 0, "pressType": "momentary"},
+  {"id": "UB2", "messageType": "cc", "cc": 102, "min": 0, "max": 90, "midiChannel": 0, "pressType": "momentary"},
+  {"id": "UB3", "messageType": "cc", "cc": 103, "min": 0, "max": 91, "midiChannel": 0, "pressType": "momentary"}
+],
+"lowerButton": [
+  {"id": "LB0", "messageType": "note", "note": 105, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
+  {"id": "LB1", "messageType": "note", "note": 106, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
+  {"id": "LB2", "messageType": "note", "note": 107, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"},
+  {"id": "LB3", "messageType": "note", "note": 108, "min": 0, "max": 127, "midiChannel": 0, "pressType": "momentary"}
 ]}

@@ -24,7 +24,8 @@ type LaunchControlXlConfig = {
     potentiometer: PotentiometerConfig[], 
     fader: FaderConfig[], 
     button: ButtonConfig[], 
-    controlButton: ButtonConfig[]
+    upperButton: ButtonConfig[]
+    lowerButton: ButtonConfig[]
 };
 
 class LaunchControlXl {
@@ -35,7 +36,8 @@ class LaunchControlXl {
     potentiometer: Array<Potentiometer>;
     fader: Array<Fader>
     button: Array<Button>;
-    controlButton: Array<Button>;
+    upperButton: Array<Button>;
+    lowerButton: Array<Button>;
 
     controller: Array<Potentiometer | Fader | Button>;
     controllerLed: Array<Potentiometer>;
@@ -44,14 +46,17 @@ class LaunchControlXl {
         this.potentiometer = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.POTENTIOMETER_ROWS)
             .map(({r, i}) => new Potentiometer({id: `P${r}:${i}` }));
         this.fader = arrayIncr(LaunchControlXl.UNITS_PER_ROW).map(i => new Fader({id: `F${i}`}));
-        this.button = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.BUTTON_ROWS).map(({r, i}) => new Button({id: `B${r}:${i}`}));
-        this.controlButton = arrayIncr(LaunchControlXl.UNITS_PER_ROW).map(i => new Button({id: `CB${i}`}));
+        this.button = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.BUTTON_ROWS)
+            .map(({r, i}) => new Button({id: `B${r}:${i}`}));
+        this.upperButton = arrayIncr(LaunchControlXl.UNITS_PER_ROW / 2).map(i => new Button({id: `UB${i}`}));
+        this.lowerButton = arrayIncr(LaunchControlXl.UNITS_PER_ROW / 2).map(i => new Button({id: `LB${i}`}));
 
         this.controller = [
             ...this.potentiometer, 
             ...this.fader, 
-            ...this.button, 
-            ...this.controlButton
+            ...this.button,
+            ...this.lowerButton, 
+            ...this.upperButton
         ];
         this.controllerLed = this.potentiometer;
     }
@@ -63,7 +68,8 @@ class LaunchControlXl {
             potentiometer: this.potentiometer.map(x => x.toConfig()),
             fader: this.fader.map(x => x.toConfig()),
             button: this.button.map(x => x.toConfig()),
-            controlButton: this.controlButton.map(x => x.toConfig())
+            upperButton: this.upperButton.map(x => x.toConfig()),
+            lowerButton: this.lowerButton.map(x => x.toConfig())
         }
     }
     /**
@@ -73,7 +79,8 @@ class LaunchControlXl {
         this.potentiometer.forEach((x, i) => x.fromConfig(config.potentiometer[i]));
         this.fader.forEach((x, i) => x.fromConfig(config.fader[i]));
         this.button.forEach((x, i) => x.fromConfig(config.button[i]));
-        this.controlButton.forEach((x, i) => x.fromConfig(config.controlButton[i]));
+        this.upperButton.forEach((x, i) => x.fromConfig(config.upperButton[i]));
+        this.lowerButton.forEach((x, i) => x.fromConfig(config.lowerButton[i]));
         return this;
     }
     /**
