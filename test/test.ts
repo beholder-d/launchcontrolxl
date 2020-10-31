@@ -16,24 +16,25 @@ const frmt = (x: string) =>
     .replace(/":/g,'": ')
     .replace(']}', '\n]}');
 
+const folder = './test-data'
 { 
-    const sysexFilename = './template/test.syx';
+    const sysexFilename = `${folder}/test.syx`;
     const sysex: Sysex = new Sysex(fs.readFileSync(sysexFilename));
     // init Launch Control XL with test.syx
     const testLcxl = (new LaunchControlXl()).fromSysex(sysex);
     // get lcxl sys and save it
-    const diffSysexFilename = './template/test-for-diff.syx';
+    const diffSysexFilename = `${folder}/test-for-diff.syx`;
     const diffSysex = testLcxl.toSysex();
     fs.writeFileSync(diffSysexFilename, diffSysex);
 
     console.log(`Comparing ${sysexFilename} and ${diffSysexFilename}`);
     deepStrictEqual(sysex, diffSysex, `${sysexFilename} and ${diffSysexFilename} are different`);
 
-    const jsonDiffFilename = './template/test-for-diff.json';
+    const jsonDiffFilename = `${folder}/test-for-diff.json`;
     const testDiffConfig = testLcxl.toConfig();
     fs.writeFileSync(jsonDiffFilename, frmt(JSON.stringify(testDiffConfig)));
 
-    const jsonFilename = './template/test.json';
+    const jsonFilename = `${folder}/test.json`;
     const testConfig = JSON.parse(fs.readFileSync(jsonFilename, 'utf8'));
 
     console.log(`Comparing ${jsonFilename} and ${jsonDiffFilename}`);
@@ -51,10 +52,10 @@ const frmt = (x: string) =>
     });
 
     const diffSysex = lcxl.toSysex();
-    const diffSysexFilename = './template/inc-for-diff.syx';
+    const diffSysexFilename = `${folder}/inc-for-diff.syx`;
     fs.writeFileSync(diffSysexFilename, diffSysex);
 
-    const sysexFilename = './template/inc.syx';
+    const sysexFilename = `${folder}/inc.syx`;
     const sysex: Sysex = new Sysex(fs.readFileSync(sysexFilename));
 
     console.log(`Comparing ${sysexFilename} and ${diffSysexFilename}`);
