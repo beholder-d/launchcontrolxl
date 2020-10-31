@@ -32,6 +32,7 @@ class LaunchControlXl {
     static readonly UNITS_PER_ROW = 8;
     static readonly POTENTIOMETER_ROWS = 3;
     static readonly BUTTON_ROWS = 2;
+    static readonly UD_BUTTONS_PER_GROUP = 4;
 
     potentiometer: Array<Potentiometer>;
     fader: Array<Fader>
@@ -48,8 +49,8 @@ class LaunchControlXl {
         this.fader = arrayIncr(LaunchControlXl.UNITS_PER_ROW).map(i => new Fader({id: `F${i}`}));
         this.button = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.BUTTON_ROWS)
             .map(({r, i}) => new Button({id: `B${r}:${i}`}));
-        this.upperButton = arrayIncr(LaunchControlXl.UNITS_PER_ROW / 2).map(i => new Button({id: `UB${i}`}));
-        this.lowerButton = arrayIncr(LaunchControlXl.UNITS_PER_ROW / 2).map(i => new Button({id: `LB${i}`}));
+        this.upperButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP).map(i => new Button({id: `UB${i}`}));
+        this.lowerButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP).map(i => new Button({id: `LB${i}`}));
 
         this.controller = [
             ...this.potentiometer, 
