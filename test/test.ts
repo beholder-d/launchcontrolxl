@@ -17,7 +17,9 @@ const frmt = (x: string) =>
     .replace(']}', '\n]}');
 
 const folder = './test-data'
-{ 
+{
+    console.log('\n*** Load/Save gives the same output');
+
     const sysexFilename = `${folder}/test.syx`;
     const sysex: Sysex = new Sysex(fs.readFileSync(sysexFilename));
     // init Launch Control XL with test.syx
@@ -41,6 +43,8 @@ const folder = './test-data'
     deepStrictEqual(testConfig, testDiffConfig, `${jsonFilename} and ${jsonDiffFilename} are different`);
 }
 {
+    console.log('\n\n*** Generative test');
+    
     const lcxl = new LaunchControlXl();
     lcxl.controller.forEach((ctrl, i) => {
         ctrl.messageType = MessageType.CC;
