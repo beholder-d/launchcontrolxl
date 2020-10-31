@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && node build/test/test.js"
+    "build": "npx tsc",
+    "test": "npm run build && node build/test/test.js",
+    "example": "npm run build && node build/src/Example/inc-cc-ch1-ch8.js"
   },
   "author": "beholder",
   "license": "ISC",
