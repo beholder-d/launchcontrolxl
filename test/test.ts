@@ -48,7 +48,9 @@ const folder = './test-data'
     const lcxl = new LaunchControlXl();
     lcxl.controller.forEach((ctrl, i) => {
         ctrl.messageType = MessageType.CC;
-        ctrl.cc = 10 + i;
+        if(ctrl.messageType === MessageType.CC) {
+            ctrl.cc = 10 + i;
+        }
         if(ctrl.controllerType === ControllerType.POTENTIOMETER) {
             ctrl.ledColor = ledColorList[(i % LaunchControlXl.UNITS_PER_ROW) % ledColorList.length];
             ctrl.ledMidiChannel = 0;

@@ -1,6 +1,6 @@
 import { Potentiometer, PotentiometerConfig } from './Controller/Potentiometer';
 import { Fader, FaderConfig } from './Controller/Fader';
-import { Button, ButtonConfig } from './Controller/Button';
+import { Button, ButtonCC, ButtonNote, ButtonCCConfig, ButtonNoteConfig } from './Controller/Button';
 import { Sysex, sysexEqual } from './Common/Sysex';
 import { SYSEX_LENGTH } from './Controller/Controller';
 
@@ -23,9 +23,9 @@ const hexstrToSysex = (x: string): Sysex => new Sysex((x.match(/[0-9A-Za-z]{2}/g
 type LaunchControlXlConfig = {
     potentiometer: PotentiometerConfig[], 
     fader: FaderConfig[], 
-    button: ButtonConfig[], 
-    upperButton: ButtonConfig[]
-    lowerButton: ButtonConfig[]
+    button: Array<ButtonNoteConfig | ButtonCCConfig>, 
+    upperButton: Array<ButtonNoteConfig | ButtonCCConfig>,
+    lowerButton: Array<ButtonNoteConfig | ButtonCCConfig>
 };
 
 class LaunchControlXl {
@@ -36,21 +36,26 @@ class LaunchControlXl {
 
     potentiometer: Array<Potentiometer>;
     fader: Array<Fader>
-    button: Array<Button>;
-    upperButton: Array<Button>;
-    lowerButton: Array<Button>;
+    button: Array<ButtonCC | ButtonNote>;
+    upperButton: Array<ButtonCC | ButtonNote>;
+    lowerButton: Array<ButtonCC | ButtonNote>;
 
-    controller: Array<Potentiometer | Fader | Button>;
+    controller: Array<Potentiometer | Fader | ButtonCC | ButtonNote>;
     controllerLed: Array<Potentiometer>;
 
     constructor() {
         this.potentiometer = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.POTENTIOMETER_ROWS)
             .map(({r, i}) => new Potentiometer({id: `P${r}:${i}` }));
         this.fader = arrayIncr(LaunchControlXl.UNITS_PER_ROW).map(i => new Fader({id: `F${i}`}));
+        /**
+         * Following typecasts are neccessary as Typescript doesn't allow Button thru typisation check
+        */
         this.button = arrayRows(LaunchControlXl.UNITS_PER_ROW, LaunchControlXl.BUTTON_ROWS)
-            .map(({r, i}) => new Button({id: `B${r}:${i}`}));
-        this.upperButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP).map(i => new Button({id: `UB${i}`}));
-        this.lowerButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP).map(i => new Button({id: `LB${i}`}));
+            .map(({r, i}) => new Button({id: `B${r}:${i}`}) as ButtonCC | ButtonNote);
+        this.upperButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP)
+            .map(i => new Button({id: `UB${i}`}) as ButtonCC | ButtonNote);
+        this.lowerButton = arrayIncr(LaunchControlXl.UD_BUTTONS_PER_GROUP)
+            .map(i => new Button({id: `LB${i}`}) as ButtonCC | ButtonNote);
 
         this.controller = [
             ...this.potentiometer, 

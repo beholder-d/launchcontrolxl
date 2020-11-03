@@ -21,7 +21,9 @@ import { midiChannelRange } from '../Common/MidiChannel';
     for(let channel=0; channel<8; channel++) {
         lcxl.controller.forEach((ctrl, i) => {
             ctrl.messageType = MessageType.CC;
-            ctrl.cc = 10 + i;
+            if(ctrl.messageType === MessageType.CC) {
+                ctrl.cc = 10 + i;
+            }
             ctrl.midiChannel = midiChannelRange(channel);
             if(ctrl.controllerType === ControllerType.POTENTIOMETER) {
                 ctrl.ledColor = ledColorList[((i % LaunchControlXl.UNITS_PER_ROW) + 1) % ledColorList.length];
