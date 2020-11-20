@@ -1,4 +1,5 @@
 .DS_Store
+lcxl.code-workspace
 node_modules/*
 build/*
 template-example/*

@@ -79,7 +79,7 @@ class Button implements ButtonMain {
         this.midiChannel = midiChannelRange(setup.midiChannel ?? 0);
         this.min = midiValueRange(setup.min ?? 0);
         this.max = midiValueRange(setup.max ?? 127);
-        this.actionType = actionTypeRange(setup.actionType ?? ActionType.MOMENTARY);
+        this.actionType = actionTypeRange(setup.actionType ?? ActionType.TOGGLE);
     }
     /**
      * Converts sysex to configuration
